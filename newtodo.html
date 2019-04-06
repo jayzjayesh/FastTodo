@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Todo App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="newtodo.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="http://SortableJS.github.io/Sortable/Sortable.js"></script>
+    <script src="https://unpkg.com/popmotion/dist/popmotion.global.min.js"></script>
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="handlebars-v4.0.12.js"></script>
+    
+
+    
+</head>
+<body>
+        <div id="myDIV" class="header">
+            <h2 style="margin:5px">My To Do List</h2>
+            <div class="start">
+            <input type="text" id="input1" placeholder="Add a new List.." class="form-control" autocomplete="on">
+            </div>
+            <button onclick="newz()" class="addBtn btn btn-dark" type="button" id="addbtn">New List</button>
+            <div class="start">
+            <input type="text" id="input" placeholder="Add to Current List.." class="form-control">
+            </div>
+            <button onclick="newz1()" class="addBtn btn btn-dark" type="button" id="addbtn1">Add   </button>
+       
+        </div>
+        <div class="container">
+             <div class="row" id="rowz">
+                    <div class="col-sm" id="here">
+                    </div>
+                    <div class="col-sm" id="here1">
+                      </div>
+                    <div class="col-sm" id="here2">
+                       
+                    </div>
+            </div>
+        
+        
+        
+        
+        
+        
+        <script type="text/javascript">
+        var i=1,count=0;
+        var keeptrack =[];
+        var el,sortable,spanz;
+        var closez = document.getElementsByClassName("close1");
+        var edithead = document.getElementsByClassName("closer");
+
+                // var j;
+                // for (j= 0; j < closez.length; j++) {
+                //     closez[j].onclick = function() {
+                //          console.log("hi");
+                //         var div = this.parentElement;
+                //         var divz = div.id;
+                //         var subz = divz.substring(0,(divz.length)-1);
+                //         console.log(subz);
+
+                //         var div1 = div.parentElement.parentElement;
+                //         console.log(div1);
+
+                //         div1.style.display = "none";
+
+                //         var zz = keeptrack.indexOf(subz);
+                //         console.log("This is sub index"+zz);
+                //         keeptrack.splice(zz,1);  
+                    
+
+                //         }
+                //     }
+                
+
+            
+         
+
+
+            var newz = function newelement(){
+            var info = "<div class='w3-container'><div class='w3-card-4' id='cardu' style='width:100%;margin-top:20px;'><header class='w3-container w3-black'><div class='row'><div class='col-auto mr-auto'><p id='headz' style='margin-bottom:0px;font-size:40px;margin-top:10px;'>{{datau}}</p></div><div class='col-auto' id='coldzera' style='margin-top:15px;'></div></div><div class='col-100' id='tar'></div></header><div class='w3-container'><p id='hereitis'></p></div><footer class='w3-container w3-grey'><p style='font-size:10px;margin-top:10px;'>{{givedate}}</p></footer></div></div>";
+            var newlist = document.createElement(("ul"));
+            newlist.className = "list-group";
+            var template = Handlebars.compile(info);
+            var new2 = document.getElementById("input1").value;
+
+
+
+            
+            
+                if(keeptrack.length == 0){
+                    keeptrack.push(new2);
+                }
+                
+                else if(keeptrack.length>0){
+                    for(var c in keeptrack){
+                        if(keeptrack[c] == new2){
+                                count++;
+                        }
+                        
+                    }
+                    keeptrack.push(new2); 
+
+                }
+
+            
+            if(count>0){
+                alert("List already taken");
+                document.getElementById("input1").value = '';
+                count = 0;
+                keeptrack.pop();
+            }
+            else if(new2 == ''){
+                alert(" Please enter something");
+            }
+            else{  
+                
+            
+
+
+            newlist.id = new2;
+            var date = new Date();
+
+            var data = template({datau: new2,givedate : date});
+              
+            if(i==1){ 
+            
+            document.getElementById("here").innerHTML += data;  
+            var getz = document.getElementById("here");
+            Sortable.create(getz,{group: 'omega',sort:'false'});
+            document.getElementById("hereitis").id = new2+"x";
+            document.getElementById(new2+"x").appendChild(newlist);
+             el = document.getElementById(new2);
+             sortable = Sortable.create(el,{group : 'shared'});
+                
+             
+             
+             spanz = document.createElement("button");
+             spanz1 = document.createElement("button");
+             spanz2 = document.createElement("SPAN");
+             spanz3 = document.createElement("button");
+             var txtz = document.createTextNode("\u00D7"); //close
+             var txtz1 = document.createTextNode("\u270e"); // edit
+             var txtz2 = document.createTextNode("\u2714"); //check
+             var txtz3 = document.createElement("textarea"); //textarea
+             spanz.className = "close1";
+             spanz1.className = "closer";
+             spanz3.className = "closer1";   
+
+             txtz3.className = "form-control";
+             txtz3.style = 'margin-bottom:4px;'
+             var col2 = document.getElementById('coldzera');
+             var col3 = document.getElementById('tar');
+             var getin = document.getElementById('headz');
+             getin.id = new2+"z";
+             spanz3.appendChild(txtz2);
+             spanz.appendChild(txtz);
+             spanz1.appendChild(txtz1);
+             spanz2.appendChild(txtz3);
+
+             spanz2.style.display = 'none';
+             document.getElementById('coldzera').appendChild(spanz);
+             document.getElementById('coldzera').appendChild(spanz1);
+             col2.id = new2+"coldzera";
+
+             document.getElementById('tar').appendChild(spanz2);
+             col3.id = new2 + "tar";
+            
+            var eachcard = document.getElementById("cardu");
+            eachcard.id = "here" + new2 + "xyz";
+
+              
+
+
+             
+
+            
+            }
+            if(i==2){
+           
+                document.getElementById("here1").innerHTML += data;
+                var getz = document.getElementById("here1");
+                Sortable.create(getz,{group: 'omega',sort:'false'});
+                document.getElementById("hereitis").id = new2+"x";
+                document.getElementById(new2+"x").appendChild(newlist);
+                el = document.getElementById(new2);
+                sortable = Sortable.create(el,{group : 'shared'});
+                var col2 = document.getElementById('coldzera');
+                var col3 = document.getElementById('tar');
+
+
+                spanz = document.createElement("button");
+                spanz1 = document.createElement("button");
+                spanz2 = document.createElement("SPAN");
+                spanz3 = document.createElement("button");
+
+                var txtz = document.createTextNode("\u00D7");
+                var txtz1 = document.createTextNode("\u270e");
+                var txtz2 = document.createTextNode("\u2714"); //check
+                var txtz3 = document.createElement("textarea"); //textarea
+                
+
+
+                spanz.className = "close1";
+                spanz1.className = "closer";
+                spanz3.className = "closer1";
+
+                var getin = document.getElementById('headz');
+                getin.id = new2+"z";
+                
+                spanz3.appendChild(txtz2);
+                spanz.appendChild(txtz);
+                spanz1.appendChild(txtz1);
+                spanz2.appendChild(txtz3);
+                spanz2.style.display = 'none';
+                txtz3.className = "form-control";
+                txtz3.style = 'margin-bottom:4px;'
+                document.getElementById('coldzera').appendChild(spanz);
+                document.getElementById('coldzera').appendChild(spanz1);
+                col2.id = new2+"coldzera";
+
+                document.getElementById('tar').appendChild(spanz2);
+                col3.id = new2 + "tar";
+
+
+                eachcard = document.getElementById("cardu");
+                eachcard.id = "here1" + new2 + "xyz";
+                
+
+               
+
+
+            }
+            if(i==3){
+                
+            
+
+                document.getElementById("here2").innerHTML += data;
+                var getz = document.getElementById("here2");
+                Sortable.create(getz,{group: 'omega',sort:'false'});
+                document.getElementById("hereitis").id = new2+"x";
+                document.getElementById(new2+"x").appendChild(newlist);
+                 el = document.getElementById(new2);
+                sortable = Sortable.create(el,{group : 'shared'});
+                var col2 = document.getElementById('coldzera');
+                var col3 = document.getElementById('tar');
+
+
+                spanz = document.createElement("button");
+                spanz1 = document.createElement("button");
+                spanz2 = document.createElement("SPAN");
+                spanz3 = document.createElement("button");
+
+                var txtz = document.createTextNode("\u00D7"); //close
+                var txtz1 = document.createTextNode("\u270e"); //edit
+                var txtz2 = document.createTextNode("\u2714"); //check
+                var txtz3 = document.createElement("textarea"); //textarea
+
+
+                spanz.className = "close1";
+                spanz1.className = "closer";
+                spanz3.className = "closer1";
+
+                var getin = document.getElementById('headz');
+                getin.id = new2+"z";
+
+                spanz3.appendChild(txtz2);
+                spanz.appendChild(txtz);
+                spanz1.appendChild(txtz1);
+                spanz2.appendChild(txtz3);
+                
+                spanz2.style.display = 'none';
+                txtz3.className = "form-control";
+                txtz3.style = 'margin-bottom:4px;'
+
+                document.getElementById('coldzera').appendChild(spanz);
+                document.getElementById('coldzera').appendChild(spanz1);   
+                col2.id = new2+"coldzera";
+ 
+                document.getElementById('tar').appendChild(spanz2);
+                col3.id = new2 + "tar";
+
+                eachcard = document.getElementById("cardu");
+                eachcard.id = "here2" + new2 + "xyz";
+
+
+                
+
+            }
+            
+            
+             var k;
+             for (k= 0; k < closez.length; k++) {
+                    closez[k].onclick = function() {
+                        
+
+                        var div = this.parentElement;
+                        //take in the current header element
+                        var div2 = div.id;
+                        
+
+                        
+                        var divz = div.parentElement.parentElement.id;
+                        
+                        var subz = div2.substring(0,(div2.length)-8); //take out the input from it
+                        console.log("this is subz"+subz);  
+
+                        var div1 = div.parentElement.parentElement;
+                        div1.parentElement.style.display = "none";
+                            
+                        document.getElementById(subz).id= new2+"old";
+                        document.getElementById(subz+"x").id= new2 + "x" +"old";
+
+                        var zz = keeptrack.indexOf(subz);
+
+                        keeptrack.splice(zz,1);
+                        if(i==1){
+                        i=2;
+                    }
+                    i--;
+                
+                        
+                    }
+                    var kz;
+                    for (kz=0;kz<edithead.length;kz++){
+                        edithead[kz].onclick = function(){
+                            var kz2 = this.parentElement;
+                            var kz2id = kz2.id.substring(0,kz2.id.length-8);
+                            
+                            var kza = kz2.parentElement.parentElement;
+
+
+                            var kz3 = kza.childNodes[1].childNodes[0]; //gettting span of text area
+                            var kz4 = kza.childNodes[0].childNodes[0]; //getting para
+                            kz3.style.display = 'block';
+
+                            //var getul = document.getElementById(kz2id+"z");
+                           // console.log("this is getul"+getul.id);
+
+                            kz2.appendChild(spanz3);
+
+                            spanz3.onclick = function(){
+                                var countz=0,countz1=0;
+                                var hat = this.parentElement;
+
+
+                               
+
+                                for(var l=0;l<keeptrack.length;l++){
+                                    if(kz3.childNodes[0].value == keeptrack[l]){
+                                        countz = 1;
+                                        }
+                                    if(kz4.childNodes[0].innerHTML == keeptrack[l]){
+                                        countz1 = l;
+
+                                    }     
+                                    }
+                                if(kz3.childNodes[0].value == ''){
+                                    alert("Please Write Something");
+                                }    
+                                else if(countz>0){
+                                    alert("List already exists");
+                                }
+                                else{
+                                kz4.childNodes[0].innerHTML=kz3.childNodes[0].value;
+                                kza.childNodes[1].id = kz2id + "tar"+"old";
+                                kz3.style.display = 'none';
+                                kz2.removeChild(spanz3);
+                                keeptrack.splice(countz1,1);
+                                keeptrack.push(kz3.childNodes[0].value);
+                                document.getElementById("input1").value = kz3.childNodes[0].value;
+                                
+                                var kazama = kza.parentElement.childNodes[1].childNodes[0];
+                                kazama.id = kz3.childNodes[0].value+"x";
+                                kazama.childNodes[0].id = kz3.childNodes[0].value;
+                                hat.id = kz3.childNodes[0].value + "coldzera";
+                                countz = 0;
+                                countz1 =0;
+
+
+
+
+
+                                }
+
+
+
+
+
+
+                                
+                                
+
+                            }
+                            
+                            
+
+                        }
+                    }
+                    
+                }
+                i++;
+            if(i>3){
+                i=1;
+            }
+            
+
+            
+            }
+        }; 
+                    
+  
+
+                
+
+
+
+
+                var close = document.getElementsByClassName("close2");
+                var j;
+                for (j= 0; j < close.length; j++) {
+                    close[j].onclick = function() {
+                        var div = this.parentElement;
+                        div.style.display = "none";
+                    }
+                } 
+                
+                var edit1 = document.getElementsByClassName("edit1");
+                var c;
+                for(c=0;c<edit1.length;c++){
+                    edit1[c].onclick = function(){
+                        var sel = this.parentElement;
+                    }
+                }
+
+
+
+
+
+
+
+
+
+            var z=1,counter=0;
+            var newz1 =function newdata()
+            {   var y;
+                var infoz = "<li style='list-style:none;width:100%;' id='thisisli' class='list-group-item'><div class='row'><div class='col-auto mr-auto'>{{newdata}}</div><div class='col-auto' id='hmm'></div></div><div class='row'><div class='col-12' style='width:100%;margin-left:2px;' id='hmm1'></div></div></li>"
+                var template = Handlebars.compile(infoz);
+                var listid = document.getElementById("input1").value;
+                var newdatataken = document.getElementById("input").value;
+
+                if(listid == ''){
+                    alert("Write List Name");
+                }
+                function find(listid){
+                    var kewl=0,newl=0;
+                    for(var c in keeptrack){
+                        if(keeptrack[c] != listid){
+                            kewl = 1;
+                            
+                        }else{
+                            newl = 1;
+
+                        }
+                    
+                    }
+                    return newl;
+                }
+                
+            
+                
+                
+                if(newdatataken == ''){
+                    alert("Write Something");
+                }
+
+                if(newdatataken != '' && listid != ''){
+
+                    if(find(listid) != 1){
+
+                    
+                    alert("No List Found");
+                    }
+
+                
+
+            
+
+
+               
+                
+                else{
+                counter++;
+                var data1 = template({newdata : newdatataken});
+                  
+                document.getElementById(listid).innerHTML += data1;
+                document.getElementById("input").value = '';
+                
+
+                var myNodelist = document.getElementsByTagName("li");
+                var newli = document.getElementById("thisisli");
+                newli.id = newdatataken + listid+ counter +"xz";
+                
+                //var k1 = document.getElementById(newli.id).childNodes[0];
+               // var diva = document.createElement("div");
+               // diva.className = 'col-auto mr-auto'; 
+               // diva.appendChild(k1);   
+
+
+               var diva1 = document.getElementById("hmm");
+               diva1.id = newdatataken + listid+ counter +"hmm";
+                
+
+
+
+
+                
+
+
+
+                
+                var span = document.createElement("SPAN");
+                var span1 = document.createElement("SPAN");
+                var span2 = document.createElement("SPAN");
+                var span3 = document.createElement("SPAN");
+                
+                var txt = document.createTextNode("\u00D7");
+                var editz = document.createTextNode("\u270e");
+                var ta = document.createElement("textarea");
+                var check = document.createTextNode("\u2714");
+                span.className = "close2";
+                span1.className = "edit1";
+                span3.className = "edit12";
+                span2.className = "textarea1";
+
+                ta.style = "width:100%";
+                ta.className = "form-control";
+                ta.id = newdatataken+listid+counter+"ta";
+                
+                span.appendChild(txt); //close buttton
+                span3.appendChild(check); // check button
+                span1.appendChild(editz); // edit button
+
+
+
+                span2.appendChild(ta); // textarea
+                var see = document.getElementById("hmm1");
+                see.id = newdatataken+listid+counter+"hmm1";
+                see.appendChild(span2);
+              
+                
+                diva1.appendChild(span);
+                diva1.appendChild(span1);
+
+
+
+                //diva1.appendChild(span2);
+                span2.style.display = 'none';
+                
+
+
+                for (y = 0; y < close.length; y++) {
+                    close[y].onclick = function() {
+                    var div = this.parentElement;
+                    var kol = div.id.substring(0,div.id.length-3)+"xz";
+                    var kol1 = document.getElementById(kol);
+
+                    kol1.style.display = "none";
+                    }
+                }
+                var c;
+                for(c=0;c<edit1.length;c++){
+                    edit1[c].onclick = function(){
+                        var sel = this.parentElement.parentElement;
+                        var kk = sel.parentElement;
+                        var kk1 = kk.childNodes[1].childNodes[0].childNodes[0];
+
+                        var childz = sel.childNodes[0];
+                      
+                       
+                        var sel1 = sel.id.length;
+                        var sel2 = sel.id.substring(0,(sel1)-3);
+                        var sel3 = sel.id.substring(sel2.length,(sel1)-2);
+                        var a1 = sel.parentElement.id;
+
+                        
+                        this.parentElement.appendChild(span3); // checkbutton
+                        //sel.appendChild(span2); // text area
+                        //var taz = document.getElementById(sel2+sel3+"ta");
+                        
+                        
+                            kk1.style.display = 'block';
+                            var taz = kk1.childNodes[0];
+
+                        
+                        
+                        
+                            span3.onclick = function(){
+                            //var ah = document.getElementById(sel.id).childNodes[0];
+                            if(taz.value == ''){
+                                alert("Write something!");
+                            }
+                            else{
+                            childz.innerHTML = taz.value;
+                            sel.id = taz.value + a1 +sel3+"xz";
+                            //taz.id = taz.value + a1 +sel3+ "ta"
+                            kk1.style.display = 'none';
+
+                            
+                            this.parentElement.removeChild(span3);
+
+                            }
+
+                            } 
+                        
+
+                    }
+                }
+
+      
+          
+
+            }
+        }
+        };
+       // localStorage.setItem('compressedFunc', newz.toString());
+        //localStorage.setItem('compressedFunc1', newz1.toString());
+       // var compressedFunc = localStorage.getItem('compressedFunc');
+       // var compressedFunc1 = localStorage.getItem('compressedFunc1');
+
+// Convert the String back to a function
+        //var myFunc = eval('(' + compressedFunc + ')');
+       // var myFunc1 = eval('(' + compressedFunc1 + ')');
+
+// Use it
+       // myFunc();
+       /// myFunc1();
+
+
+           console.log(keeptrack);
+            
+        </script>
+
+       
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+   
+
+</body>
+</html>

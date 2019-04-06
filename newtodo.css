@@ -1,0 +1,234 @@
+
+ body {
+    margin: 0;
+    min-width: 250px;
+  }
+
+.w3-card-4{
+      display: block;
+     
+  }
+
+.start{
+    width: 75%;
+}
+
+
+.close2 {
+    display: inline;
+    float: right;
+    right: 0;
+    top: 0;
+    padding: 1px 9px 4px 10px;
+}
+
+
+.edit1 
+ {
+    display: inline;
+    float: right;
+    top: 0;
+    padding: 1px 9px 4px 10px;
+    
+
+}
+.edit12{
+    display: inline;
+    float: right;
+    top: 0;
+    padding: 1px 9px 1px 9px;
+    
+}
+
+.edit12:hover{
+    background-color: green;
+    color: white;
+}
+
+.close1{
+    display: inline;
+    float: right;
+    top: 0;
+    padding: 12px -1px 2px 7px;
+    margin-top:10px;
+    margin-left: 5px;
+}
+.closer{
+    
+    display: inline;
+    float: right;
+    top: 0;
+    padding: 12px -1px 2px 7px;
+    margin-top:10px;
+    margin-left: 5px;
+}
+.closer1{
+    
+    display: inline;
+    float: right;
+    top: 0;
+    padding: 12px -1px 2px 7px;
+    margin-top:10px;
+    margin-left: 5px;
+}
+
+.close1:hover,.closer:hover{
+    background-color: #f44336;
+    color: white;
+
+}
+.closer:hover{
+    background-color: #0089ff;
+    color: white;
+}
+
+.closer1:hover{
+    background-color: green;
+    color: white;
+}
+
+
+.close1:not(:disabled):not(.disabled) {
+    cursor: pointer;
+}
+
+.closer:not(:disabled):not(.disabled) {
+    cursor: pointer;
+}
+
+.closer1:not(:disabled):not(.disabled) {
+    cursor: pointer;
+}
+
+
+.close2:hover{
+    background-color: #f44336;
+    color: white;
+    
+}
+.edit1:hover{
+
+    background-color: #0089ff;
+    color: white;
+
+} 
+
+.textarea1 {
+    display: block;
+    margin-top: 20px;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+ul li {
+    display: inline;
+    cursor: pointer;
+    position: relative;
+    padding: 12px 8px 12px 40px;
+    background: #eee;
+    font-size: 18px;
+    transition: 0.2s;
+    margin-top: 10px;
+    float: left;
+    justify-content: space-between;
+    align-content: flex-start;
+    flex-direction: row;
+
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+ul li:hover {
+    background: #ddd;
+}
+
+ul li.checked {
+    background: #888;
+    color: #fff;
+    text-decoration: line-through;
+}
+.list-group-item{
+    display: flex;
+}
+
+ul li.checked::before {
+    content: '';
+    position: absolute;
+    border-color: #fff;
+    border-style: solid;
+    border-width: 0 2px 2px 0;
+    top: 10px;
+    left: 16px;
+    transform: rotate(45deg);
+    height: 15px;
+    width: 7px;
+}
+.header {
+    background-color: grey;
+    padding: 30px 40px;
+    color: white;
+    text-align: center;
+}
+
+.header:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+input {
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    width: 75%;
+    padding: 10px;
+    float: left;
+    font-size: 16px;
+}
+#input{
+    margin-top : 5px;
+}
+
+.addBtn {
+    padding: 10px;
+    width: 25%;
+    background: #d9d9d9;
+    color: #555;
+    float: left;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 0;
+}
+
+.addBtn:hover {
+    background-color: #bbb;
+}
+#addbtn{
+    margin-bottom: 4px;
+    text-align: center;
+
+}
+
+#addbtn1{
+    margin-top:4px;
+    text-align: center;
+
+}
+
+.w3-card-4:hover{
+    box-shadow: 8px 8px 10px #555;
+}
+
+.form-control{
+    width: 0px;
+}
+
